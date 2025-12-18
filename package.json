@@ -1,14 +1,50 @@
 {
   "name": "create-minimalize-template",
   "version": "1.0.4",
-  "description": "Initializer para proyectos Vite + React con mi configuración",
+  "type": "module",
+  "description": "CLI to scaffold React + Vite + TypeScript + Tailwind v4 + Wouter + Zustand projects",
+  "keywords": [
+    "vite",
+    "react",
+    "typescript",
+    "tailwind",
+    "tailwindcss",
+    "wouter",
+    "zustand",
+    "template",
+    "scaffold",
+    "cli",
+    "create-app"
+  ],
+  "author": "Tu Nombre <tu@email.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/minimalize-template-cli.git"
+  },
+  "bugs": {
+    "url": "https://github.com/yourusername/minimalize-template-cli/issues"
+  },
+  "homepage": "https://github.com/yourusername/minimalize-template-cli#readme",
   "bin": {
     "create-minimalize-template": "cli.js"
   },
   "files": [
     "template/**/*",
-    "cli.js"
+    "cli.js",
+    "README.md",
+    "CHANGELOG.md"
   ],
+  "scripts": {
+    "test": "node cli.js test-project-temp && rm -rf test-project-temp",
+    "release:patch": "npm version patch && npm publish",
+    "release:minor": "npm version minor && npm publish",
+    "release:major": "npm version major && npm publish",
+    "prepublishOnly": "node -e \"console.log('🔍 Validating template...'); const fs = require('fs'); if (!fs.existsSync('./template/package.json')) { console.error('❌ Template missing!'); process.exit(1); } console.log('✅ Template valid');\""
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
   "dependencies": {
     "fs-extra": "^11.1.1"
   }

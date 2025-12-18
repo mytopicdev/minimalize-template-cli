@@ -1,0 +1,94 @@
+name: CI
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main]
+
+jobs:
+  validate:
+    name: Validate Template
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install CLI dependencies
+        run: npm install
+
+      - name: Validate template structure
+        run: |
+          echo "🔍 Validating template structure..."
+          test -f template/package.json || (echo "❌ package.json missing" && exit 1)
+          test -f template/vite.config.ts || (echo "❌ vite.config.ts missing" && exit 1)
+          test -f template/tsconfig.json || (echo "❌ tsconfig.json missing" && exit 1)
+          test -f template/index.html || (echo "❌ index.html missing" && exit 1)
+          test -d template/src || (echo "❌ src directory missing" && exit 1)
+          echo "✅ Template structure valid"
+
+      - name: Test CLI - Create project
+        run: |
+          echo "🧪 Testing CLI..."
+          node cli.js test-project-ci
+          test -d test-project-ci || (echo "❌ Project not created" && exit 1)
+          echo "✅ CLI creates projects successfully"
+
+      - name: Install project dependencies
+        run: |
+          echo "📦 Installing dependencies..."
+          cd test-project-ci
+          npm install
+
+      - name: Lint generated project
+        run: |
+          echo "🔍 Running linter..."
+          cd test-project-ci
+          npm run lint
+
+      - name: Build generated project
+        run: |
+          echo "🏗️ Building project..."
+          cd test-project-ci
+          npm run build
+          test -d dist || (echo "❌ Build failed - no dist folder" && exit 1)
+          echo "✅ Build successful"
+
+      - name: Cleanup
+        if: always()
+        run: rm -rf test-project-ci
+
+  test-multiple-node-versions:
+    name: Test on Node ${{ matrix.node-version }}
+    runs-on: ubuntu-latest
+    
+    strategy:
+      matrix:
+        node-version: [18, 20, 22]
+    
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Setup Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+      
+      - name: Install and test
+        run: |
+          npm install
+          node cli.js test-node-${{ matrix.node-version }}
+          cd test-node-${{ matrix.node-version }}
+          npm install
+          npm run build
+      
+      - name: Cleanup
+        if: always()
+        run: rm -rf test-node-${{ matrix.node-version }}
+

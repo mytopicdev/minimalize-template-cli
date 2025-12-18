@@ -1,0 +1,80 @@
+name: Publish to NPM
+
+on:
+  push:
+    tags:
+      - 'v*.*.*'
+
+jobs:
+  publish:
+    name: Publish Package
+    runs-on: ubuntu-latest
+    
+    permissions:
+      contents: write
+      id-token: write
+    
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Validate template
+        run: |
+          echo "🔍 Validating template before publish..."
+          test -f template/package.json || (echo "❌ Template invalid" && exit 1)
+          echo "✅ Template validation passed"
+
+      - name: Test CLI
+        run: |
+          echo "🧪 Testing CLI before publish..."
+          node cli.js test-publish
+          cd test-publish
+          npm install
+          npm run build
+          cd ..
+          rm -rf test-publish
+          echo "✅ CLI test passed"
+
+      - name: Extract version from tag
+        id: get_version
+        run: echo "VERSION=${GITHUB_REF#refs/tags/v}" >> $GITHUB_OUTPUT
+
+      - name: Publish to NPM
+        run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: ${{ github.ref_name }}
+          name: Release ${{ steps.get_version.outputs.VERSION }}
+          body: |
+            ## 🚀 Release ${{ steps.get_version.outputs.VERSION }}
+            
+            ### Installation
+            ```bash
+            npx create-minimalize-template@${{ steps.get_version.outputs.VERSION }} my-project
+            ```
+            
+            ### Changes
+            See [CHANGELOG.md](https://github.com/${{ github.repository }}/blob/main/CHANGELOG.md) for details.
+          draft: false
+          prerelease: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Success notification
+        run: |
+          echo "✅ Successfully published version ${{ steps.get_version.outputs.VERSION }}"
+          echo "📦 Package: https://www.npmjs.com/package/create-minimalize-template"
+

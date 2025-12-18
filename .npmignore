@@ -1,0 +1,11 @@
+# Files to exclude from npm package
+.git
+.github
+.vscode
+.DS_Store
+node_modules
+test-project-*
+*.log
+.env
+.env.*
+
