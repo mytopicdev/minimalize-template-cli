@@ -1,7 +1,7 @@
-import authStore from '@/stores/auth'
+import useAuthStore from '@/stores/auth'
 
 export default function LoginPage() {
-  const { login } = authStore()
+  const { login } = useAuthStore()
 
   return (
     <div>

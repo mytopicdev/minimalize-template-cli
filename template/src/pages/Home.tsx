@@ -1,7 +1,7 @@
-import authStore from '@/stores/auth'
+import useAuthStore from '@/stores/auth'
 
 export default function HomePage() {
-  const { logout } = authStore()
+  const { logout } = useAuthStore()
   return (
     <div>
       <p> Hi! Im the HomePage component! </p>
