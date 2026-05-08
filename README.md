@@ -16,19 +16,27 @@
 - 🔍 **ESLint** - Linting configurado con reglas modernas
 - 📱 **Estructura pre-configurada** - Router y store de autenticación listos
 
+## 🏗️ Arquitectura y Decisiones
+
+Este repositorio usa una guía de arquitectura optimizada para agentes y mantenible para equipos:
+
+- Reglas activas: `docs/architecture/conventions.md`
+- Registro de decisiones (ADR): `docs/architecture/decisions/README.md`
+- Skill de ejecución estructural: `.github/skills/minimalize-architecture/SKILL.md`
+
 ## 🎯 Stack Tecnológico
 
 ### Dependencias Principales
 
-| Librería | Versión | Propósito |
-|----------|---------|-----------|
-| **React** | ^19.1.0 | Framework UI |
-| **React DOM** | ^19.1.0 | React para web |
-| **Vite** | ^7.0.0 | Build tool y dev server |
-| **TypeScript** | ~5.8.3 | Tipado estático |
+| Librería         | Versión | Propósito                   |
+| ---------------- | ------- | --------------------------- |
+| **React**        | ^19.1.0 | Framework UI                |
+| **React DOM**    | ^19.1.0 | React para web              |
+| **Vite**         | ^7.0.0  | Build tool y dev server     |
+| **TypeScript**   | ~5.8.3  | Tipado estático             |
 | **Tailwind CSS** | ^4.1.11 | Framework CSS utility-first |
-| **Wouter** | ^3.7.1 | Router ligero (1.3KB) |
-| **Zustand** | ^5.0.6 | Gestión de estado |
+| **Wouter**       | ^3.7.1  | Router ligero (1.3KB)       |
+| **Zustand**      | ^5.0.6  | Gestión de estado           |
 
 ### Herramientas de Desarrollo
 
@@ -134,7 +142,7 @@ export const useAuthStore = create<AuthState>((set) => ({
 El proyecto viene con path aliases configurados:
 
 ```typescript
-import Component from '@/pages/Home'  // En vez de '../../../pages/Home'
+import Component from '@/pages/Home' // En vez de '../../../pages/Home'
 ```
 
 ## 📋 Scripts Disponibles en el CLI
