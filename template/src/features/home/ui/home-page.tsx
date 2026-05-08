@@ -1,6 +1,6 @@
 import { useAuthStore } from '@/features/auth'
 
-export default function HomePage() {
+export function HomePage() {
   const { logout } = useAuthStore()
   return (
     <div>
