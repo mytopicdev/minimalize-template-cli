@@ -1,4 +1,4 @@
-import useAuthStore from '@/stores/auth'
+import { useAuthStore } from '@/features/auth'
 
 export default function HomePage() {
   const { logout } = useAuthStore()

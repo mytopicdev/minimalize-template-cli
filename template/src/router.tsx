@@ -1,5 +1,5 @@
 import { Route, Switch } from 'wouter'
-import LoginPage from '@/pages/Login'
+import { LoginPage } from '@/features/auth'
 import HomePage from '@/pages/Home'
 
 export function PrivateRouter() {

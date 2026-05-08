@@ -1,6 +1,6 @@
-import useAuthStore from '@/stores/auth'
+import { useAuthStore } from '../state/use-auth-store'
 
-export default function LoginPage() {
+export function LoginPage() {
   const { login } = useAuthStore()
 
   return (
