@@ -22,7 +22,7 @@ This directory stores Architecture Decision Records.
 
 ### Accepted
 
-- None.
+- `2026-05-08-adopt-minimalize-architecture.md` - Adopt Minimalize Architecture as default project structure.
 
 ### Superseded
 
