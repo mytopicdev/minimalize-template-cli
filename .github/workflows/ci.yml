@@ -7,10 +7,55 @@ on:
     branches: [main]
 
 jobs:
+  commit-format:
+    name: Validate Commit Format
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Validate commit messages
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          if [[ "${{ github.event_name }}" == "pull_request" ]]; then
+            RANGE="${{ github.event.pull_request.base.sha }}..${{ github.sha }}"
+          else
+            BEFORE="${{ github.event.before }}"
+            if [[ -z "$BEFORE" || "$BEFORE" == "0000000000000000000000000000000000000000" ]]; then
+              RANGE="${{ github.sha }}^!"
+            else
+              RANGE="$BEFORE..${{ github.sha }}"
+            fi
+          fi
+
+          echo "Checking commits in range: $RANGE"
+
+          mapfile -t commits < <(git log --format=%s "$RANGE")
+
+          if [[ ${#commits[@]} -eq 0 ]]; then
+            echo "No commits to validate"
+            exit 0
+          fi
+
+          for msg in "${commits[@]}"; do
+            echo "$msg" > .git/COMMIT_EDITMSG
+            node scripts/validate-commit-msg.mjs .git/COMMIT_EDITMSG
+          done
+
   validate:
     name: Validate Template
     runs-on: ubuntu-latest
-    
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -67,19 +112,19 @@ jobs:
   test-multiple-node-versions:
     name: Test on Node ${{ matrix.node-version }}
     runs-on: ubuntu-latest
-    
+
     strategy:
       matrix:
         node-version: [18, 20, 22]
-    
+
     steps:
       - uses: actions/checkout@v4
-      
+
       - name: Setup Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
-      
+
       - name: Install and test
         run: |
           npm install
@@ -87,8 +132,7 @@ jobs:
           cd test-node-${{ matrix.node-version }}
           npm install
           npm run build
-      
+
       - name: Cleanup
         if: always()
         run: rm -rf test-node-${{ matrix.node-version }}
-
