@@ -136,6 +136,17 @@ npm run commit:hooks
 
 Esto configura `core.hooksPath` para usar `.githooks/commit-msg`.
 
+### Comportamiento esperado para agentes
+
+Cuando el usuario pide implementar un cambio (agregar/corregir/refactorizar) y el agente deja cambios nuevos en el working tree:
+
+- Debe crear el commit correspondiente al cierre del request.
+- Debe usar el formato emoji definido en esta guía.
+- Debe incluir solo archivos relacionados al request.
+- No debe usar `--no-verify`.
+
+La política operativa está en `.github/instructions/commit.instructions.md`.
+
 ## 🏷️ Sistema de Versionado
 
 ### Semantic Versioning

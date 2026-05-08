@@ -23,6 +23,7 @@ This directory stores Architecture Decision Records.
 ### Accepted
 
 - `2026-05-08-adopt-minimalize-architecture.md` - Adopt Minimalize Architecture as default project structure.
+- `2026-05-08-agent-emoji-commit-policy.md` - Require agent commits for implementation requests using emoji commit convention.
 
 ### Superseded
 

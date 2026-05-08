@@ -24,6 +24,13 @@ Este repositorio usa una guía de arquitectura optimizada para agentes y manteni
 - Registro de decisiones (ADR): `docs/architecture/decisions/README.md`
 - Skill de ejecución estructural: `.github/skills/minimalize-architecture/SKILL.md`
 
+## 🤖 Comportamiento de Agentes
+
+Para requests de implementación (agregar/corregir), este repositorio define que el agente debe commitear los cambios del request usando la convención de commits con emoji.
+
+- Instrucción de commit para agentes: `.github/instructions/commit.instructions.md`
+- Regla de formato y ejemplos: `CONTRIBUTING.md`
+
 ## 🎯 Stack Tecnológico
 
 ### Dependencias Principales
