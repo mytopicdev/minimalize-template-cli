@@ -7,12 +7,29 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.0.0] - 2025-05-14
+
+### ⚠️ BREAKING CHANGES
+- Restructured template architecture for better scalability
+- Updated project dependencies to latest versions
+- Modified template configurations (eslint, vite, typescript)
+
 ### Added
-- Comprehensive README with detailed documentation
-- Changelog file for version tracking
-- Release scripts for semantic versioning
-- Package.json metadata (keywords, repository, license)
-- Pre-publish validation script
+- Enhanced template structure with improved organization
+- Comprehensive project documentation (PLAN.md, PROJECT_SUMMARY.md, QUICK_REFERENCE.md)
+- Setup guides and contribution guidelines
+- Dynamic versioning in CLI
+- Improved error handling in CLI
+
+### Changed
+- Updated template dependencies to latest stable versions
+- Restructured configuration files for better maintainability
+- Enhanced console messages for better user experience
+- Improved CLI validation and error messages
+
+### Fixed
+- Template path resolution issues
+- Configuration consistency across files
 
 ## [1.0.4] - 2024-XX-XX
 
