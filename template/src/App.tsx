@@ -1,8 +1,8 @@
 import { PrivateRouter, PublicRouter } from './router'
-import authStore from '@/stores/auth'
+import useAuthStore from '@/stores/auth'
 
 function App() {
-  const { isAuthenticated } = authStore()
+  const { isAuthenticated } = useAuthStore()
 
   if (isAuthenticated) return <PrivateRouter />
 

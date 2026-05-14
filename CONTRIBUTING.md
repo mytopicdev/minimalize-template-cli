@@ -59,6 +59,7 @@ git commit -m "feat: add new feature to Home page"
 ```
 
 **Estos cambios requieren:**
+
 - ✅ Probar que el template genera proyectos funcionales
 - ✅ Actualizar el README si afecta el uso
 - ✅ Actualizar CHANGELOG.md
@@ -91,31 +92,60 @@ git commit -m "docs: update installation instructions"
 
 ## 📝 Estándares de Commit
 
-Usamos [Conventional Commits](https://www.conventionalcommits.org/):
+Usamos una variante minimalista de Conventional Commits con emoji:
 
-```
-<type>(<scope>): <description>
-
-[optional body]
+```text
+<emoji> <type>(<scope>): <short subject>
 ```
 
-### Tipos:
-- `feat`: Nueva funcionalidad
-- `fix`: Corrección de bugs
-- `docs`: Solo documentación
-- `style`: Formato, sin cambios de código
-- `refactor`: Refactoring sin cambiar funcionalidad
-- `test`: Agregar o modificar tests
-- `chore`: Cambios en build, CI, etc
+Reglas:
 
-### Ejemplos:
+- Subject breve (max 72 caracteres).
+- Subject en imperativo y sin punto final.
+- Scope opcional en kebab-case.
+
+Tipos permitidos:
+
+- `✨ feat`: Nueva funcionalidad.
+- `🐛 fix`: Corrección de bugs.
+- `📝 docs`: Documentación.
+- `♻️ refactor`: Refactor sin cambio funcional.
+- `✅ test`: Pruebas.
+- `🔧 chore`: Mantenimiento, tooling y CI.
+
+Ejemplos:
 
 ```bash
-feat(template): add dark mode support
-fix(cli): handle spaces in project names
-docs(readme): add troubleshooting section
-chore(deps): update React to 19.1.1
+✨ feat(template): add auth guard for private routes
+🐛 fix(cli): handle project names with dots
+📝 docs(readme): add architecture governance section
+🔧 chore(ci): validate commit emoji format
 ```
+
+Mensajes permitidos sin formato (compatibilidad):
+
+- `Merge ...`
+- `Revert ...`
+- `vX.Y.Z` (commits de versionado)
+
+### Activar hooks locales
+
+```bash
+npm run commit:hooks
+```
+
+Esto configura `core.hooksPath` para usar `.githooks/commit-msg`.
+
+### Comportamiento esperado para agentes
+
+Cuando el usuario pide implementar un cambio (agregar/corregir/refactorizar) y el agente deja cambios nuevos en el working tree:
+
+- Debe crear el commit correspondiente al cierre del request.
+- Debe usar el formato emoji definido en esta guía.
+- Debe incluir solo archivos relacionados al request.
+- No debe usar `--no-verify`.
+
+La política operativa está en `.github/instructions/commit.instructions.md`.
 
 ## 🏷️ Sistema de Versionado
 
@@ -307,4 +337,3 @@ git commit -m "feat!: upgrade to React 20"
 ## 📄 Licencia
 
 Al contribuir, aceptas que tus contribuciones serán licenciadas bajo la misma licencia MIT del proyecto.
-
