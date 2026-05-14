@@ -1,8 +1,8 @@
 {
   "name": "create-minimalize-template",
-  "version": "1.1.0",
+  "version": "1.4.0",
   "type": "module",
-  "description": "CLI to scaffold React + Vite + TypeScript + Tailwind v4 + Wouter + Zustand projects",
+  "description": "CLI to scaffold React + Vite + TypeScript + Tailwind v4 + React Router + Zustand projects",
   "keywords": [
     "vite",
     "react",
