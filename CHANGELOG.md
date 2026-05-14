@@ -7,6 +7,46 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.4.0] - 2025-05-14
+
+### ⚠️ Breaking Changes
+
+- Replaced Wouter with React Router DOM for routing
+- Restructured template with Minimalize Architecture (feature-based organization)
+
+### Added
+
+- React Router DOM with data router pattern and layouts
+- Feature-based architecture: auth, home, routing modules
+- Common utilities module with `cn()` helper (clsx + tailwind-merge)
+- Prettier with Tailwind CSS plugin
+- Environment variables example (.env.example) with TypeScript types
+- Lint, format, and type-check scripts in template
+- Agent guidance documentation (AGENTS.md)
+- ADR for Minimalize Architecture adoption
+- Emoji commit validation flow and policy
+
+### Changed
+
+- Migrated routing from Wouter to React Router DOM
+- Reorganized template structure by feature/domain
+- Moved auth store to feature module
+- Relocated cn utility to common/utils
+- Improved template maintainability and scalability
+
+### Fixed
+
+- CLI: corrected package.json name in generated projects
+- Dependencies: removed unused 'path' package
+- Dependencies: moved tailwind to devDependencies
+- Hooks: renamed authStore → useAuthStore for consistency
+
+### Removed
+
+- Wouter routing library
+- Redundant jsconfig.json
+- PROJECT_SUMMARY.md and WOUTER_MIGRATION_PLAN.md files
+
 ## [1.2.0] - 2025-05-14
 
 ### Added
