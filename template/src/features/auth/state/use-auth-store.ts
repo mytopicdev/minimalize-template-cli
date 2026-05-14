@@ -7,7 +7,7 @@ interface AuthStore {
   logout: () => void
 }
 
-const useAuthStore = create<AuthStore>()(
+export const useAuthStore = create<AuthStore>()(
   persist(
     (set) => ({
       isAuthenticated: false,
@@ -16,8 +16,6 @@ const useAuthStore = create<AuthStore>()(
     }),
     {
       name: 'auth-storage',
-    }
-  )
+    },
+  ),
 )
-
-export default useAuthStore
