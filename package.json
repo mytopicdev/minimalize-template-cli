@@ -37,6 +37,8 @@
   ],
   "scripts": {
     "test": "node cli.js test-project-temp && rm -rf test-project-temp",
+    "commit:hooks": "git config core.hooksPath .githooks",
+    "commit:check": "git log -1 --format=%s > .git/COMMIT_EDITMSG && node scripts/validate-commit-msg.mjs .git/COMMIT_EDITMSG",
     "release:patch": "npm version patch && npm publish",
     "release:minor": "npm version minor && npm publish",
     "release:major": "npm version major && npm publish",

@@ -4,7 +4,7 @@ import fse from 'fs-extra'
 import { resolve, dirname } from 'path'
 import { fileURLToPath } from 'url'
 
-const { copy, pathExists, readJSON } = fse
+const { copy, pathExists, readJSON, writeJSON } = fse
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
@@ -80,6 +80,12 @@ const templateDir = resolve(__dirname, 'template')
 
     // Copiar template
     await copy(templateDir, targetDir)
+
+    // Actualizar nombre del package.json con el nombre del proyecto
+    const targetPackageJsonPath = resolve(targetDir, 'package.json')
+    const targetPackageJson = await readJSON(targetPackageJsonPath)
+    targetPackageJson.name = projectName
+    await fse.writeJSON(targetPackageJsonPath, targetPackageJson, { spaces: 2 })
 
     console.log('✅ ¡Proyecto creado exitosamente!')
     console.log('')

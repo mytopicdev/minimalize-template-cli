@@ -41,6 +41,15 @@ Describe las pruebas que realizaste:
 - [ ] Mis cambios no generan nuevos warnings
 - [ ] Los commits siguen Conventional Commits
 
+## 🏗️ Arquitectura (si aplica)
+
+- [ ] Cambié estructura de carpetas o límites entre módulos
+- [ ] Revisé `docs/architecture/conventions.md`
+- [ ] Referencié ADR cuando hubo decisión arquitectónica nueva o excepción
+- [ ] Evité imports a internals de otros features
+
+ADR relacionado: N/A o `docs/architecture/decisions/YYYY-MM-DD-short-title.md`
+
 ## 🎯 Tipo de Versión
 
 Este cambio requiere release:
@@ -57,4 +66,3 @@ Agrega screenshots si hay cambios visuales.
 ## 💡 Notas Adicionales
 
 Información adicional relevante para los reviewers.
-
