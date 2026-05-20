@@ -13,3 +13,7 @@ coverage/
 *.swo
 *~
 
+# pnpm
+.pnpm-store/
+.pnpm-debug.log
+

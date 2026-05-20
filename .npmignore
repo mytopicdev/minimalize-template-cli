@@ -8,4 +8,7 @@ test-project-*
 *.log
 .env
 .env.*
+pnpm-lock.yaml
+pnpm-workspace.yaml
+.pnpm-store
 

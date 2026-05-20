@@ -147,9 +147,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ```bash
 # 1. Actualizar este CHANGELOG.md con los cambios
 # 2. Ejecutar el comando de release apropiado:
-npm run release:patch  # Para bug fixes
-npm run release:minor  # Para nuevas features
-npm run release:major  # Para breaking changes
+pnpm release:patch    # Para bug fixes
+pnpm release:minor    # Para nuevas features
+pnpm release:major    # Para breaking changes
 
 # 3. Hacer push del tag:
 git push --follow-tags

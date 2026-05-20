@@ -57,7 +57,7 @@ Para requests de implementación (agregar/corregir), este repositorio define que
 ### Crear un nuevo proyecto
 
 ```bash
-npx create-minimalize-template mi-proyecto
+pnpx create-minimalize-template mi-proyecto
 ```
 
 ### Comandos disponibles
@@ -65,17 +65,17 @@ npx create-minimalize-template mi-proyecto
 ```bash
 # Instalación y desarrollo
 cd mi-proyecto
-npm install
-npm run dev
+pnpm install
+pnpm dev
 
 # Build de producción
-npm run build
+pnpm build
 
 # Preview del build
-npm run preview
+pnpm preview
 
 # Linting
-npm run lint
+pnpm lint
 ```
 
 ## 📁 Estructura del Proyecto Generado
@@ -164,15 +164,15 @@ git clone https://github.com/yourusername/minimalize-template-cli.git
 cd minimalize-template-cli
 
 # Instalar dependencias
-npm install
+pnpm install
 
 # Probar el CLI localmente
 node cli.js test-project
 
 # Publicar nueva versión
-npm run release:patch  # 1.0.4 -> 1.0.5
-npm run release:minor  # 1.0.4 -> 1.1.0
-npm run release:major  # 1.0.4 -> 2.0.0
+pnpm release:patch    # 1.0.4 -> 1.0.5
+pnpm release:minor    # 1.0.4 -> 1.1.0
+pnpm release:major    # 1.0.4 -> 2.0.0
 ```
 
 ## 🔄 Sistema de Versionado
@@ -186,9 +186,9 @@ Este proyecto sigue [Semantic Versioning](https://semver.org/):
 ### Comandos de Release
 
 ```bash
-npm run release:patch  # Bug fixes
-npm run release:minor  # Nuevas features
-npm run release:major  # Breaking changes
+pnpm release:patch    # Bug fixes
+pnpm release:minor    # Nuevas features
+pnpm release:major    # Breaking changes
 ```
 
 ## 🤝 Contribuir

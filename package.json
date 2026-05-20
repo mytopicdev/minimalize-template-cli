@@ -39,14 +39,15 @@
     "test": "node cli.js test-project-temp && rm -rf test-project-temp",
     "commit:hooks": "git config core.hooksPath .githooks",
     "commit:check": "git log -1 --format=%s > .git/COMMIT_EDITMSG && node scripts/validate-commit-msg.mjs .git/COMMIT_EDITMSG",
-    "release:patch": "npm version patch && npm publish",
-    "release:minor": "npm version minor && npm publish",
-    "release:major": "npm version major && npm publish",
+    "release:patch": "pnpm version patch && pnpm publish",
+    "release:minor": "pnpm version minor && pnpm publish",
+    "release:major": "pnpm version major && pnpm publish",
     "prepublishOnly": "node -e \"console.log('🔍 Validating template...'); const fs = require('fs'); if (!fs.existsSync('./template/package.json')) { console.error('❌ Template missing!'); process.exit(1); } console.log('✅ Template valid');\""
   },
   "engines": {
     "node": ">=18.0.0"
   },
+  "packageManager": "pnpm@9.15.4",
   "dependencies": {
     "fs-extra": "^11.1.1"
   }

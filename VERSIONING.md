@@ -45,8 +45,9 @@ MAJOR.MINOR.PATCH
 ```
 
 #### 🚀 Comando:
+
 ```bash
-npm run release:patch
+pnpm release:patch
 ```
 
 ---
@@ -85,8 +86,9 @@ npm run release:patch
 ```
 
 #### 🚀 Comando:
+
 ```bash
-npm run release:minor
+pnpm release:minor
 ```
 
 ---
@@ -125,8 +127,9 @@ npm run release:minor
 ```
 
 #### 🚀 Comando:
+
 ```bash
-npm run release:major
+pnpm release:major
 ```
 
 ---
@@ -152,7 +155,7 @@ vim template/src/pages/NewPage.tsx
 
 # Prueba localmente
 node cli.js test-local
-cd test-local && npm install && npm run dev
+cd test-local && pnpm install && pnpm dev
 
 # Si funciona, haz commit con Conventional Commits
 git add .
@@ -169,15 +172,18 @@ Edita `CHANGELOG.md` y mueve los cambios de `[Unreleased]` a una nueva versión:
 ## [1.1.0] - 2024-12-18
 
 ### Added
+
 - New Dashboard page with analytics
 - Dark mode support with Zustand store
 - useLocalStorage custom hook
 
 ### Changed
+
 - Improved error messages in CLI
 - Updated dependencies to latest patch versions
 
 ### Fixed
+
 - Fixed routing issue on Login page
 ```
 
@@ -190,12 +196,13 @@ git commit -m "chore: update changelog for v1.1.0"
 
 ```bash
 # Decide el tipo de versión y ejecuta:
-npm run release:patch   # 1.0.4 → 1.0.5
-npm run release:minor   # 1.0.4 → 1.1.0
-npm run release:major   # 1.0.4 → 2.0.0
+pnpm release:patch     # 1.0.4 → 1.0.5
+pnpm release:minor     # 1.0.4 → 1.1.0
+pnpm release:major     # 1.0.4 → 2.0.0
 ```
 
 **Esto automáticamente:**
+
 1. ✅ Incrementa la versión en `package.json`
 2. ✅ Crea un commit de versión
 3. ✅ Crea un git tag (ej: `v1.1.0`)
@@ -210,6 +217,7 @@ git push origin --tags
 ```
 
 **GitHub Actions automáticamente:**
+
 1. ✅ Detecta el nuevo tag
 2. ✅ Ejecuta tests
 3. ✅ Crea un GitHub Release
@@ -234,7 +242,7 @@ git add CHANGELOG.md
 git commit -m "chore: update changelog"
 
 # Release PATCH
-npm run release:patch
+pnpm release:patch
 git push origin main --tags
 ```
 
@@ -254,7 +262,7 @@ git add .
 git commit -m "docs: update changelog and readme for v1.1.0"
 
 # Release MINOR
-npm run release:minor
+pnpm release:minor
 git push origin main --tags
 ```
 
@@ -263,7 +271,7 @@ git push origin main --tags
 ```bash
 # Actualizas React a una versión major
 cd template
-npm install react@20.0.0 react-dom@20.0.0
+pnpm install react@20.0.0 react-dom@20.0.0
 
 # Actualizas código si es necesario
 vim src/main.tsx
@@ -278,7 +286,7 @@ git add CHANGELOG.md
 git commit -m "chore: update changelog for v2.0.0"
 
 # Release MAJOR
-npm run release:major
+pnpm release:major
 git push origin main --tags
 ```
 
@@ -286,12 +294,12 @@ git push origin main --tags
 
 ## 📋 Checklist Pre-Release
 
-Antes de hacer `npm run release:*`, verifica:
+Antes de hacer `pnpm release:*`, verifica:
 
 - [ ] 🧪 El template genera proyectos que funcionan
-- [ ] 📦 `npm install` funciona en proyectos generados
-- [ ] 🚀 `npm run dev` arranca sin errores
-- [ ] 🏗️ `npm run build` compila correctamente
+- [ ] 📦 `pnpm install` funciona en proyectos generados
+- [ ] 🚀 `pnpm dev` arranca sin errores
+- [ ] 🏗️ `pnpm build` compila correctamente
 - [ ] 📝 CHANGELOG.md está actualizado
 - [ ] 📖 README.md refleja los cambios (si aplica)
 - [ ] ✅ Commits siguen Conventional Commits
@@ -316,7 +324,7 @@ git tag -d v1.1.0
 npm deprecate create-minimalize-template@1.1.0 "Esta versión tiene un bug, usa 1.1.1"
 
 # Publicar una versión fixed
-npm run release:patch
+pnpm release:patch
 ```
 
 ---
@@ -347,4 +355,3 @@ Si tienes dudas sobre qué versión usar, pregúntate:
    - ✅ SÍ → PATCH
 
 **En caso de duda, pregunta en el PR o Issue.**
-

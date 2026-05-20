@@ -65,8 +65,13 @@ jobs:
         with:
           node-version: '20'
 
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
       - name: Install CLI dependencies
-        run: npm install
+        run: pnpm install
 
       - name: Validate template structure
         run: |
@@ -89,19 +94,19 @@ jobs:
         run: |
           echo "📦 Installing dependencies..."
           cd test-project-ci
-          npm install
+          pnpm install
 
       - name: Lint generated project
         run: |
           echo "🔍 Running linter..."
           cd test-project-ci
-          npm run lint
+          pnpm lint
 
       - name: Build generated project
         run: |
           echo "🏗️ Building project..."
           cd test-project-ci
-          npm run build
+          pnpm build
           test -d dist || (echo "❌ Build failed - no dist folder" && exit 1)
           echo "✅ Build successful"
 
@@ -125,13 +130,18 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
 
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
       - name: Install and test
         run: |
-          npm install
+          pnpm install
           node cli.js test-node-${{ matrix.node-version }}
           cd test-node-${{ matrix.node-version }}
-          npm install
-          npm run build
+          pnpm install
+          pnpm build
 
       - name: Cleanup
         if: always()

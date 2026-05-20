@@ -19,23 +19,23 @@ Guia rapida para agentes de codigo en este repositorio.
 
 ### Root
 
-- Instalar dependencias: `npm install`
-- Probar CLI (smoke): `npm test`
-- Validar mensaje de commit local: `npm run commit:check`
-- Activar hook de commit-msg: `npm run commit:hooks`
+- Instalar dependencias: `pnpm install`
+- Probar CLI (smoke): `pnpm test`
+- Validar mensaje de commit local: `pnpm commit:check`
+- Activar hook de commit-msg: `pnpm commit:hooks`
 
 ### Template
 
 Ejecutar desde `template/`:
 
-- Desarrollo: `npm run dev`
-- Build: `npm run build`
-- Preview: `npm run preview`
-- Lint: `npm run lint`
-- Autofix lint: `npm run lint:fix`
-- Formato: `npm run format`
-- Chequeo de formato: `npm run format:check`
-- Tipos: `npm run type-check`
+- Desarrollo: `pnpm dev`
+- Build: `pnpm build`
+- Preview: `pnpm preview`
+- Lint: `pnpm lint`
+- Autofix lint: `pnpm lint:fix`
+- Formato: `pnpm format`
+- Chequeo de formato: `pnpm format:check`
+- Tipos: `pnpm type-check`
 
 ## Arquitectura y limites
 

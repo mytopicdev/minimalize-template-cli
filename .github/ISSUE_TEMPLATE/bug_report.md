@@ -31,18 +31,21 @@ Si aplica, agrega screenshots.
 ## 🖥️ Información del Sistema
 
 **CLI:**
+
 - Versión del CLI: [ej. 1.0.4]
-- Comando ejecutado: [ej. `npx create-minimalize-template mi-app`]
+- Comando ejecutado: [ej. `pnpx create-minimalize-template mi-app`]
 
 **Sistema:**
+
 - OS: [ej. macOS 14.0, Windows 11, Ubuntu 22.04]
 - Node: [ej. 20.10.0]
 - npm: [ej. 10.2.3]
 
 **Proyecto Generado (si aplica):**
+
 - ¿El proyecto se creó? [Sí/No]
-- ¿npm install funcionó? [Sí/No]
-- ¿npm run dev funcionó? [Sí/No]
+- ¿pnpm install funcionó? [Sí/No]
+- ¿pnpm dev funcionó? [Sí/No]
 
 ## 📝 Logs de Error
 
@@ -53,4 +56,3 @@ Pega aquí los logs de error completos
 ## 🔍 Contexto Adicional
 
 Cualquier otra información que consideres relevante.
-

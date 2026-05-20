@@ -12,13 +12,13 @@ git clone https://github.com/yourusername/minimalize-template-cli.git
 cd minimalize-template-cli
 
 # 2. Instala dependencias (si las hubiera en el futuro)
-npm install
+pnpm install
 
 # 3. Prueba el CLI localmente
 node cli.js test-project
 cd test-project
-npm install
-npm run dev
+pnpm install
+pnpm dev
 ```
 
 ## 📁 Estructura del Proyecto
@@ -51,7 +51,7 @@ vim template/src/pages/Home.tsx
 # Prueba localmente
 node cli.js test-project-local
 cd test-project-local
-npm install && npm run dev
+pnpm install && pnpm dev
 
 # Si funciona, commit
 git add template/
@@ -131,7 +131,7 @@ Mensajes permitidos sin formato (compatibilidad):
 ### Activar hooks locales
 
 ```bash
-npm run commit:hooks
+pnpm commit:hooks
 ```
 
 Esto configura `core.hooksPath` para usar `.githooks/commit-msg`.
@@ -163,7 +163,7 @@ Seguimos [SemVer](https://semver.org/): `MAJOR.MINOR.PATCH`
 - Mejorar documentación
 
 # Release:
-npm run release:patch
+pnpm release:patch
 ```
 
 #### MINOR (1.X.0) - Nuevas Features
@@ -176,7 +176,7 @@ npm run release:patch
 - Actualizar dependencias minor (19.1.0 -> 19.2.0)
 
 # Release:
-npm run release:minor
+pnpm release:minor
 ```
 
 #### MAJOR (X.0.0) - Breaking Changes
@@ -189,7 +189,7 @@ npm run release:minor
 - Cambiar API del CLI
 
 # Release:
-npm run release:major
+pnpm release:major
 ```
 
 ## 🚢 Proceso de Release
@@ -221,7 +221,7 @@ git commit -m "chore: update changelog for v1.1.0"
 # - Incrementa la versión en package.json
 # - Crea un git tag
 # - Publica a npm
-npm run release:minor  # o patch/major según corresponda
+pnpm release:minor     # o patch/major según corresponda
 ```
 
 ### 3. Push de Tags
@@ -244,9 +244,9 @@ git push origin --tags
 Antes de hacer release, verifica:
 
 - [ ] El template genera proyectos que compilan sin errores
-- [ ] `npm install` funciona en proyectos generados
-- [ ] `npm run dev` funciona en proyectos generados
-- [ ] `npm run build` funciona en proyectos generados
+- [ ] `pnpm install` funciona en proyectos generados
+- [ ] `pnpm dev` funciona en proyectos generados
+- [ ] `pnpm build` funciona en proyectos generados
 - [ ] El CHANGELOG.md está actualizado
 - [ ] El README.md refleja todos los cambios
 - [ ] Los commits siguen Conventional Commits
@@ -262,13 +262,13 @@ node cli.js test-project-manual
 
 # 2. Instala y corre
 cd test-project-manual
-npm install
+pnpm install
 
 # 3. Verifica todos los comandos
-npm run dev      # ¿Arranca sin errores?
-npm run build    # ¿Compila correctamente?
-npm run lint     # ¿Pasa el linting?
-npm run preview  # ¿Preview funciona?
+pnpm dev         # ¿Arranca sin errores?
+pnpm build       # ¿Compila correctamente?
+pnpm lint        # ¿Pasa el linting?
+pnpm preview     # ¿Preview funciona?
 
 # 4. Verifica funcionalidad
 # - ¿Las rutas funcionan?
@@ -302,7 +302,7 @@ cd ..
 
 # Prueba que todo funciona
 node cli.js test-deps
-cd test-deps && npm install && npm run build
+cd test-deps && pnpm install && pnpm build
 
 # Si funciona, commit
 git add template/package.json template/package-lock.json
@@ -314,14 +314,14 @@ git commit -m "chore(deps): update dependencies"
 ```bash
 # Actualiza una por una y prueba
 cd template
-npm install react@latest react-dom@latest
-npm run build  # ¿Compila?
+pnpm install react@latest react-dom@latest
+pnpm build           # ¿Compila?
 
 # Prueba el template completo
 cd ..
 node cli.js test-major-update
 cd test-major-update
-npm install && npm run dev
+pnpm install && pnpm dev
 
 # Si funciona, esto es probablemente un MAJOR release
 git add template/

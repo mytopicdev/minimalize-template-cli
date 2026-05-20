@@ -6,15 +6,15 @@
 
 ```bash
 # Crear nuevo proyecto
-npx create-minimalize-template mi-proyecto
+pnpx create-minimalize-template mi-proyecto
 
 # Comandos dentro del proyecto generado
 cd mi-proyecto
-npm install        # Instalar dependencias
-npm run dev        # Desarrollo local (http://localhost:5173)
-npm run build      # Build de producción
-npm run preview    # Preview del build
-npm run lint       # Linting con ESLint
+pnpm install       # Instalar dependencias
+pnpm dev           # Desarrollo local (http://localhost:5173)
+pnpm build         # Build de producción
+pnpm preview       # Preview del build
+pnpm lint          # Linting con ESLint
 ```
 
 ---
@@ -24,12 +24,12 @@ npm run lint       # Linting con ESLint
 ```bash
 # Testing local
 node cli.js test-project                  # Crear proyecto de prueba
-cd test-project && npm install && npm run dev
+cd test-project && pnpm install && pnpm dev
 
 # Releases
-npm run release:patch    # 1.0.4 → 1.0.5 (bug fixes)
-npm run release:minor    # 1.0.4 → 1.1.0 (nuevas features)
-npm run release:major    # 1.0.4 → 2.0.0 (breaking changes)
+pnpm release:patch       # 1.0.4 → 1.0.5 (bug fixes)
+pnpm release:minor       # 1.0.4 → 1.1.0 (nuevas features)
+pnpm release:major       # 1.0.4 → 2.0.0 (breaking changes)
 
 # Después del release
 git push origin main --tags
@@ -66,18 +66,22 @@ minimalize-template-cli/
 ## 🎨 Stack del Template
 
 ### Core
+
 - **React 19.1.0** - Framework UI
 - **TypeScript 5.8.3** - Tipado estático
 - **Vite 7.0.0** - Build tool
 
 ### Styling
+
 - **Tailwind CSS 4.1.11** - Utility-first CSS
 
 ### Routing & State
+
 - **Wouter 3.7.1** - Router minimalista (~1.3KB)
 - **Zustand 5.0.6** - Gestión de estado simple
 
 ### Dev Tools
+
 - **ESLint 9** - Linting
 - **TypeScript ESLint 8** - TS linting rules
 
@@ -93,7 +97,7 @@ vim template/src/pages/Home.tsx
 
 # Probar
 node cli.js test-local
-cd test-local && npm install && npm run dev
+cd test-local && pnpm install && pnpm dev
 
 # Commit
 git add template/
@@ -115,7 +119,7 @@ git commit -m "chore: update changelog"
 
 ```bash
 # Elegir tipo de versión
-npm run release:minor
+pnpm release:minor
 
 # Push
 git push origin main --tags
@@ -139,8 +143,8 @@ ls -la template/package.json
 ```bash
 # Verificar dependencias
 cd template
-npm install
-npm run build
+pnpm install
+pnpm build
 
 # Si falla, hay un problema en el template
 ```
@@ -149,10 +153,10 @@ npm run build
 
 ```bash
 # Verificar login
-npm whoami
+pnpm whoami
 
 # Re-login si es necesario
-npm login
+pnpm login
 
 # Verificar permisos
 npm owner ls create-minimalize-template
@@ -162,10 +166,10 @@ npm owner ls create-minimalize-template
 
 ## 📊 Tipos de Versión (Quick Reference)
 
-| Versión | Cuándo | Ejemplos |
-|---------|--------|----------|
-| **PATCH** | Bug fixes | Corregir typos, fix bugs menores, docs |
-| **MINOR** | Nuevas features | Agregar páginas, nuevos componentes, nuevas deps |
+| Versión   | Cuándo           | Ejemplos                                            |
+| --------- | ---------------- | --------------------------------------------------- |
+| **PATCH** | Bug fixes        | Corregir typos, fix bugs menores, docs              |
+| **MINOR** | Nuevas features  | Agregar páginas, nuevos componentes, nuevas deps    |
 | **MAJOR** | Breaking changes | React 18→19, cambio de estructura, remover features |
 
 ---
@@ -202,6 +206,7 @@ import Component from '@/components/Component'
 ```
 
 Configurado en:
+
 - `vite.config.ts` - Para Vite
 - `tsconfig.json` - Para TypeScript
 - `jsconfig.json` - Para JS (autocomplete en editors)
@@ -214,7 +219,7 @@ Configurado en:
 
 ```bash
 # One-liner para test completo
-node cli.js test && cd test && npm i && npm run build && cd .. && rm -rf test
+node cli.js test && cd test && pnpm i && pnpm build && cd .. && rm -rf test
 ```
 
 ### Ver Versiones Disponibles
@@ -226,7 +231,7 @@ npm view create-minimalize-template versions
 ### Instalar Versión Específica
 
 ```bash
-npx create-minimalize-template@1.0.3 mi-proyecto
+pnpx create-minimalize-template@1.0.3 mi-proyecto
 ```
 
 ### Limpiar Tests Antiguos
@@ -250,4 +255,3 @@ rm -rf test-project-*
 ---
 
 **¿Necesitas más ayuda?** Lee la documentación completa o abre un issue. 🚀
-

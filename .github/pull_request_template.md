@@ -24,11 +24,11 @@ Related to #(issue_number)
 
 Describe las pruebas que realizaste:
 
-- [ ] Ejecuté `npm test`
+- [ ] Ejecuté `pnpm test`
 - [ ] Probé el CLI generando un nuevo proyecto
-- [ ] Verifiqué que `npm install` funciona en proyecto generado
-- [ ] Verifiqué que `npm run dev` funciona
-- [ ] Verifiqué que `npm run build` funciona
+- [ ] Verifiqué que `pnpm install` funciona en proyecto generado
+- [ ] Verifiqué que `pnpm dev` funciona
+- [ ] Verifiqué que `pnpm build` funciona
 - [ ] Actualicé/agregué tests si era necesario
 
 ## 📋 Checklist
