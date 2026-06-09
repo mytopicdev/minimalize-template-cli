@@ -286,7 +286,7 @@ rm -rf test-project-manual
 El package.json incluye:
 
 ```bash
-npm test  # Genera y limpia un proyecto de prueba
+pnpm test  # Genera y limpia un proyecto de prueba
 ```
 
 ## 📊 Actualizando Dependencias del Template
@@ -297,7 +297,7 @@ Cuando actualices dependencias en `/template/package.json`:
 
 ```bash
 cd template
-npm update
+pnpm update
 cd ..
 
 # Prueba que todo funciona
@@ -305,7 +305,7 @@ node cli.js test-deps
 cd test-deps && pnpm install && pnpm build
 
 # Si funciona, commit
-git add template/package.json template/package-lock.json
+git add template/package.json template/pnpm-lock.yaml
 git commit -m "chore(deps): update dependencies"
 ```
 

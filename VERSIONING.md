@@ -321,7 +321,7 @@ git tag -d v1.1.0
 
 ```bash
 # Deprecar la versión problemática
-npm deprecate create-minimalize-template@1.1.0 "Esta versión tiene un bug, usa 1.1.1"
+pnpm deprecate create-minimalize-template@1.1.0 "Esta versión tiene un bug, usa 1.1.1"
 
 # Publicar una versión fixed
 pnpm release:patch

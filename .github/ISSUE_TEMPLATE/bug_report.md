@@ -39,7 +39,7 @@ Si aplica, agrega screenshots.
 
 - OS: [ej. macOS 14.0, Windows 11, Ubuntu 22.04]
 - Node: [ej. 20.10.0]
-- npm: [ej. 10.2.3]
+- pnpm: [ej. 9.15.4]
 
 **Proyecto Generado (si aplica):**
 

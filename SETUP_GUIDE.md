@@ -34,17 +34,17 @@ Esta guía te ayudará a configurar tu repositorio para publicar y mantener el C
 
 ---
 
-### 2. Configurar NPM
+### 2. Configurar pnpm
 
 ```bash
-# 1. Login a npm (pnpm usa el mismo registro)
+# 1. Login al registro npm (pnpm usa el mismo registro)
 pnpm login
 
 # 2. Verificar que estés logueado
 pnpm whoami
 
 # 3. (Opcional) Verificar disponibilidad del nombre
-npm view create-minimalize-template
+pnpm view create-minimalize-template
 # Si da error 404, el nombre está disponible
 ```
 
@@ -94,7 +94,7 @@ git push -u origin main
 
 ---
 
-### 4. Primera Publicación a NPM
+### 4. Primera Publicación al registro npm
 
 ```bash
 # 1. Asegúrate de estar en main
@@ -107,7 +107,7 @@ git status
 pnpm publish
 
 # 4. Verifica que se publicó
-npm view create-minimalize-template
+pnpm view create-minimalize-template
 ```
 
 ✅ ¡Listo! Ya deberías poder usar:
@@ -176,7 +176,7 @@ GitHub Actions automáticamente:
 
 - ✅ Ejecutará tests
 - ✅ Creará un release en GitHub
-- ✅ Publicará a npm (si configuraste NPM_TOKEN)
+- ✅ Publicará al registro npm (si configuraste NPM_TOKEN)
 
 ---
 
@@ -227,10 +227,10 @@ pnpm unlink --global create-minimalize-template
 cd template
 
 # Ver outdated
-npm outdated
+pnpm outdated
 
 # Actualizar (seguros)
-npm update
+pnpm update
 
 # Actualizar majors (cuidado)
 pnpm install react@latest react-dom@latest
@@ -257,15 +257,15 @@ Cuando alguien reporte un issue:
 
 ## 🆘 Troubleshooting Común
 
-### "npm publish" falla con 403
+### "pnpm publish" falla con 403
 
 **Problema**: No tienes permisos o no estás logueado
 
 **Solución**:
 
 ```bash
-npm whoami  # Verificar login
-npm login   # Re-login si es necesario
+pnpm whoami  # Verificar login
+pnpm login   # Re-login si es necesario
 ```
 
 ### GitHub Actions falla en publish
@@ -329,7 +329,7 @@ git push origin :refs/tags/v1.1.0
 - [Semantic Versioning](https://semver.org/)
 - [Conventional Commits](https://www.conventionalcommits.org/)
 - [Keep a Changelog](https://keepachangelog.com/)
-- [npm Documentation](https://docs.npmjs.com/)
+- [pnpm Documentation](https://pnpm.io/)
 - [GitHub Actions Docs](https://docs.github.com/en/actions)
 
 ---

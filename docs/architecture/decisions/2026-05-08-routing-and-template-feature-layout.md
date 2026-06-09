@@ -137,13 +137,13 @@ Six sequential commits on `release/1.0.0`:
 
 **Per-batch**:
 
-- `npm run lint` (ESLint passes)
-- `npm run type-check` (TypeScript compiles without errors)
+- `pnpm lint` (ESLint passes)
+- `pnpm type-check` (TypeScript compiles without errors)
 
 **Final (batch 6)**:
 
-- `npm run build` (Vite production build succeeds)
-- `npm run dev` (manual smoke test: login flow, logout flow, persistence, guards)
+- `pnpm build` (Vite production build succeeds)
+- `pnpm dev` (manual smoke test: login flow, logout flow, persistence, guards)
 - Residual audit: `grep -rn "wouter|@/pages|@/stores|@/utils" src/` returns empty
 
 **Smoke test checklist**:

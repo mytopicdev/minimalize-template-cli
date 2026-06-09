@@ -159,7 +159,7 @@ pnpm whoami
 pnpm login
 
 # Verificar permisos
-npm owner ls create-minimalize-template
+pnpm owner ls create-minimalize-template
 ```
 
 ---
@@ -225,7 +225,7 @@ node cli.js test && cd test && pnpm i && pnpm build && cd .. && rm -rf test
 ### Ver Versiones Disponibles
 
 ```bash
-npm view create-minimalize-template versions
+pnpm view create-minimalize-template versions
 ```
 
 ### Instalar Versión Específica
