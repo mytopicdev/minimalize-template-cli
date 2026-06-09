@@ -34,15 +34,15 @@ Para requests de implementación (agregar/corregir), este repositorio define que
 
 ### Dependencias Principales
 
-| Librería         | Versión | Propósito                   |
-| ---------------- | ------- | --------------------------- |
-| **React**          | ^19.1.0 | Framework UI                |
-| **React DOM**       | ^19.1.0 | React para web              |
-| **Vite**            | ^7.0.0  | Build tool y dev server     |
-| **TypeScript**      | ~5.8.3  | Tipado estático             |
-| **Tailwind CSS**    | ^4.1.11 | Framework CSS utility-first |
-| **React Router DOM**| ^6.28.0 | Routing con loaders/actions |
-| **Zustand**         | ^5.0.6  | Gestión de estado           |
+| Librería             | Versión | Propósito                   |
+| -------------------- | ------- | --------------------------- |
+| **React**            | ^19.1.0 | Framework UI                |
+| **React DOM**        | ^19.1.0 | React para web              |
+| **Vite**             | ^7.0.0  | Build tool y dev server     |
+| **TypeScript**       | ~5.8.3  | Tipado estático             |
+| **Tailwind CSS**     | ^4.1.11 | Framework CSS utility-first |
+| **React Router DOM** | ^6.28.0 | Routing con loaders/actions |
+| **Zustand**          | ^5.0.6  | Gestión de estado           |
 
 ### Herramientas de Desarrollo
 
