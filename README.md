@@ -1,6 +1,6 @@
 # 🚀 Create Minimalize Template
 
-> Un CLI moderno para inicializar proyectos React con Vite, TypeScript, Tailwind CSS v4, Wouter y Zustand pre-configurados.
+> Un CLI moderno para inicializar proyectos React con Vite, TypeScript, Tailwind CSS v4, React Router v6 y Zustand pre-configurados.
 
 [![npm version](https://img.shields.io/npm/v/create-minimalize-template.svg)](https://www.npmjs.com/package/create-minimalize-template)
 [![License](https://img.shields.io/npm/l/create-minimalize-template.svg)](https://github.com/yourusername/minimalize-template-cli/blob/main/LICENSE)
@@ -11,10 +11,10 @@
 - ⚛️ **React 19** - La última versión de React
 - 🎨 **Tailwind CSS v4** - Framework CSS utility-first (última versión)
 - 📦 **TypeScript** - Tipado estático para mayor seguridad
-- 🛣️ **Wouter** - Router minimalista para React (~1.3KB)
-- 🐻 **Zustand** - Gestión de estado simple y escalable
+- 🛣️ **React Router v6** - Routing con loaders, actions y layouts anidados
+- 🐻 **Zustand** - Gestión de estado simple y escalable con persistencia
 - 🔍 **ESLint** - Linting configurado con reglas modernas
-- 📱 **Estructura pre-configurada** - Router y store de autenticación listos
+- 🏗️ **Feature-first architecture** - Estructura por dominio lista para escalar
 
 ## 🏗️ Arquitectura y Decisiones
 
@@ -36,13 +36,13 @@ Para requests de implementación (agregar/corregir), este repositorio define que
 
 | Librería         | Versión | Propósito                   |
 | ---------------- | ------- | --------------------------- |
-| **React**        | ^19.1.0 | Framework UI                |
-| **React DOM**    | ^19.1.0 | React para web              |
-| **Vite**         | ^7.0.0  | Build tool y dev server     |
-| **TypeScript**   | ~5.8.3  | Tipado estático             |
-| **Tailwind CSS** | ^4.1.11 | Framework CSS utility-first |
-| **Wouter**       | ^3.7.1  | Router ligero (1.3KB)       |
-| **Zustand**      | ^5.0.6  | Gestión de estado           |
+| **React**          | ^19.1.0 | Framework UI                |
+| **React DOM**       | ^19.1.0 | React para web              |
+| **Vite**            | ^7.0.0  | Build tool y dev server     |
+| **TypeScript**      | ~5.8.3  | Tipado estático             |
+| **Tailwind CSS**    | ^4.1.11 | Framework CSS utility-first |
+| **React Router DOM**| ^6.28.0 | Routing con loaders/actions |
+| **Zustand**         | ^5.0.6  | Gestión de estado           |
 
 ### Herramientas de Desarrollo
 
@@ -82,65 +82,92 @@ pnpm lint
 ```
 mi-proyecto/
 ├── public/
-│   └── vite.svg
 ├── src/
-│   ├── pages/
-│   │   ├── Home.tsx      # Página principal
-│   │   └── Login.tsx     # Página de login
-│   ├── stores/
-│   │   └── auth.ts       # Store de autenticación con Zustand
-│   ├── App.tsx           # Componente principal
-│   ├── router.tsx        # Configuración de rutas con Wouter
-│   ├── main.tsx          # Entry point
-│   └── index.css         # Estilos globales con Tailwind
+│   ├── common/
+│   │   └── utils/
+│   │       └── cn.ts          # Utility: clsx + tailwind-merge
+│   ├── features/
+│   │   ├── auth/              # Feature: autenticación
+│   │   │   ├── index.ts       # Barrel export
+│   │   │   ├── actions/
+│   │   │   ├── loaders/
+│   │   │   ├── state/
+│   │   │   │   └── use-auth-store.ts
+│   │   │   └── ui/
+│   │   │       └── login-page.tsx
+│   │   ├── home/              # Feature: página principal
+│   │   │   ├── index.ts
+│   │   │   ├── actions/
+│   │   │   ├── loaders/
+│   │   │   └── ui/
+│   │   │       └── home-page.tsx
+│   │   └── routing/           # Feature: configuración de rutas
+│   │       ├── index.ts
+│   │       ├── paths.ts
+│   │       ├── router.tsx
+│   │       ├── guards/
+│   │       └── ui/
+│   ├── index.css
+│   ├── main.tsx
+│   └── vite-env.d.ts
 ├── index.html
-├── vite.config.ts        # Configuración de Vite
-├── tsconfig.json         # TypeScript config
-├── eslint.config.js      # ESLint config
+├── vite.config.ts
+├── tsconfig.json
+├── eslint.config.js
 └── package.json
 ```
 
 ## 🛠️ Características Pre-configuradas
 
-### Router con Wouter
+### Routing con React Router v6
 
-El template incluye un router básico configurado con dos rutas:
-
-- `/` - Página principal (Home)
-- `/login` - Página de login
+El template incluye routing con loaders, actions y layouts anidados:
 
 ```typescript
-// src/router.tsx
-import { Route, Switch } from 'wouter'
-import Home from './pages/Home'
-import Login from './pages/Login'
+// src/features/routing/router.tsx
+import { createBrowserRouter, Navigate } from 'react-router-dom'
+import { PATHS } from './paths'
 
-export const Router = () => (
-  <Switch>
-    <Route path="/" component={Home} />
-    <Route path="/login" component={Login} />
-  </Switch>
-)
+export const appRouter = createBrowserRouter([
+  {
+    element: <AuthLayout />,
+    loader: redirectIfAuth,
+    children: [{ path: PATHS.LOGIN, element: <LoginPage /> }],
+  },
+  {
+    element: <AppLayout />,
+    loader: requireAuth,
+    children: [{ path: PATHS.ROOT, element: <HomePage /> }],
+  },
+  { path: '*', element: <Navigate to={PATHS.ROOT} replace /> },
+])
 ```
 
 ### Store de Autenticación con Zustand
 
-Store global pre-configurado para manejar autenticación:
+Store global con persistencia en localStorage:
 
 ```typescript
-// src/stores/auth.ts
+// src/features/auth/state/use-auth-store.ts
 import { create } from 'zustand'
+import { persist } from 'zustand/middleware'
 
-interface AuthState {
+interface AuthStore {
   isAuthenticated: boolean
-  user: User | null
-  login: (user: User) => void
+  login: () => void
   logout: () => void
 }
 
-export const useAuthStore = create<AuthState>((set) => ({
-  // ... implementation
-}))
+export const useAuthStore = create<AuthStore>()(
+  persist(
+    (set) => ({
+      isAuthenticated: false,
+      login: () => set({ isAuthenticated: true }),
+      logout: () => set({ isAuthenticated: false }),
+    }),
+    { name: 'auth-storage' },
+  ),
+)
 ```
 
 ### Path Aliases
@@ -151,11 +178,9 @@ El proyecto viene con path aliases configurados:
 import Component from '@/pages/Home' // En vez de '../../../pages/Home'
 ```
 
-## 📋 Scripts Disponibles en el CLI
+## 📋 Desarrollo del CLI
 
-### Para Desarrollo del Template
-
-Si estás desarrollando o contribuyendo a este CLI:
+Si estás trabajando en el CLI:
 
 ```bash
 # Clonar el repositorio
@@ -189,14 +214,6 @@ pnpm release:patch    # Bug fixes
 pnpm release:minor    # Nuevas features
 pnpm release:major    # Breaking changes
 ```
-
-## 🤝 Contribuir
-
-1. Fork el proyecto
-2. Crea tu feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit tus cambios (`git commit -m 'Add some AmazingFeature'`)
-4. Push al branch (`git push origin feature/AmazingFeature`)
-5. Abre un Pull Request
 
 ## 📝 Changelog
 
