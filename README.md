@@ -29,7 +29,6 @@ Este repositorio usa una guía de arquitectura optimizada para agentes y manteni
 Para requests de implementación (agregar/corregir), este repositorio define que el agente debe commitear los cambios del request usando la convención de commits con emoji.
 
 - Instrucción de commit para agentes: `.github/instructions/commit.instructions.md`
-- Regla de formato y ejemplos: `CONTRIBUTING.md`
 
 ## 🎯 Stack Tecnológico
 

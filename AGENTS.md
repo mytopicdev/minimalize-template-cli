@@ -59,13 +59,12 @@ Referencias obligatorias para cambios estructurales:
 
 - Si el pedido del usuario es implementacion y quedan cambios nuevos en el working tree, el agente debe commitear.
 - Formato requerido: `<emoji> <type>(<scope>): <short subject>`
-- Tipos/emoji permitidos: ver guia de contribucion.
+- Tipos/emoji permitidos: ver `.github/instructions/commit.instructions.md`.
 - No usar `--no-verify`.
 - Incluir solo archivos relacionados al pedido.
 
 Referencias:
 
-- [Guia de contribucion](CONTRIBUTING.md)
 - [ADR de commit policy](docs/architecture/decisions/2026-05-08-agent-emoji-commit-policy.md)
 - [Instruccion operativa de commit](.github/instructions/commit.instructions.md)
 

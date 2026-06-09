@@ -320,7 +320,6 @@ git push origin :refs/tags/v1.1.0
 
 - [README.md](./README.md) - Documentación principal
 - [VERSIONING.md](./VERSIONING.md) - Guía completa de versionado
-- [CONTRIBUTING.md](./CONTRIBUTING.md) - Guía de contribución
 - [QUICK_REFERENCE.md](./QUICK_REFERENCE.md) - Referencia rápida
 - [CHANGELOG.md](./CHANGELOG.md) - Historial de cambios
 
@@ -342,8 +341,7 @@ Ahora tienes:
 ✅ Documentación completa  
 ✅ Sistema de versionado  
 ✅ CI/CD automatizado  
-✅ Testing configurado  
-✅ Guidelines de contribución
+✅ Testing configurado
 
 **Siguiente paso**: Actualiza la información personal y ¡publica tu primera versión! 🚀
 

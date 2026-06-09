@@ -57,7 +57,6 @@ minimalize-template-cli/
 ├── README.md                 # 📖 Documentación principal
 ├── CHANGELOG.md              # 📝 Historial de cambios
 ├── VERSIONING.md             # 🏷️  Guía de versionado
-├── CONTRIBUTING.md           # 🤝 Guía de contribución
 └── .github/workflows/        # 🤖 CI/CD
 ```
 
@@ -187,7 +186,6 @@ pnpm owner ls create-minimalize-template
 
 - [README.md](./README.md) - Documentación principal y guía de uso
 - [CHANGELOG.md](./CHANGELOG.md) - Historial completo de versiones
-- [CONTRIBUTING.md](./CONTRIBUTING.md) - Guía detallada de contribución
 - [VERSIONING.md](./VERSIONING.md) - Guía completa de versionado
 - [LICENSE](./LICENSE) - Licencia MIT
 

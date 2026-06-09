@@ -30,7 +30,6 @@ MAJOR.MINOR.PATCH
 
 # Documentación
 - Docs: actualizar README con ejemplos
-- Docs: corregir typos en CONTRIBUTING.md
 - Docs: agregar badges al README
 
 # Actualizaciones menores de dependencias

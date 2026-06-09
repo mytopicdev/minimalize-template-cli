@@ -35,7 +35,7 @@ The policy source is `.github/instructions/commit.instructions.md`.
 
 ## Alternatives Considered
 
-- Keep policy only in CONTRIBUTING without agent instruction.
+- Keep policy only in agent instructions without an ADR.
   - Rejected because behavior would remain implicit for agents.
 - Enforce only in CI without local behavior guidance.
   - Rejected because feedback arrives late and slows iteration.
@@ -46,7 +46,6 @@ The policy source is `.github/instructions/commit.instructions.md`.
 
 - Files or areas affected:
   - `.github/instructions/commit.instructions.md`
-  - `CONTRIBUTING.md`
   - `README.md`
   - commit validation script and hook flow already in place
 - Rollout strategy:
@@ -61,5 +60,4 @@ The policy source is `.github/instructions/commit.instructions.md`.
 - `.github/instructions/commit.instructions.md`
 - `scripts/validate-commit-msg.mjs`
 - `.githooks/commit-msg`
-- `CONTRIBUTING.md`
 - `.github/workflows/ci.yml`
