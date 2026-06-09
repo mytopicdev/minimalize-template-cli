@@ -1,69 +1,61 @@
-# React + TypeScript + Vite
+# Mi Proyecto
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Generado con [create-minimalize-template](https://github.com/mytopicdev/minimalize-template-cli).
 
-Currently, two official plugins are available:
+## Stack
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **React 19** + **TypeScript**
+- **Vite 7** — build tool y dev server
+- **Tailwind CSS v4** — utility-first CSS
+- **React Router v6** — routing con loaders, actions y guards
+- **Zustand** — state management con persistencia
+- **ESLint 9** — linting configurado
 
-## Expanding the ESLint configuration
+## Comandos
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+pnpm dev          # Servidor de desarrollo
+pnpm build        # Build de producción
+pnpm preview      # Preview del build
+pnpm lint         # Ejecutar linter
+pnpm lint:fix     # Autofix de lint
+pnpm format       # Formatear código
+pnpm type-check   # Verificar tipos
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Estructura
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+```
+src/
+├── common/
+│   └── utils/
+│       └── cn.ts               # clsx + tailwind-merge
+└── features/
+    ├── auth/                   # Autenticación
+    │   ├── index.ts
+    │   ├── actions/
+    │   ├── loaders/
+    │   ├── state/
+    │   │   └── use-auth-store.ts
+    │   └── ui/
+    │       └── login-page.tsx
+    ├── home/                   # Página principal
+    │   ├── index.ts
+    │   ├── actions/
+    │   ├── loaders/
+    │   └── ui/
+    │       └── home-page.tsx
+    └── routing/                # Configuración de rutas
+        ├── index.ts
+        ├── paths.ts
+        ├── router.tsx
+        ├── guards/
+        └── ui/
+```
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## Path Aliases
+
+```typescript
+import { cn } from '@/common/utils/cn'
+import { useAuthStore } from '@/features/auth'
 ```
