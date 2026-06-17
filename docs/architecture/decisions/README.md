@@ -25,6 +25,7 @@ This directory stores Architecture Decision Records.
 - `2026-05-08-adopt-minimalize-architecture.md` - Adopt Minimalize Architecture as default project structure.
 - `2026-05-08-agent-emoji-commit-policy.md` - Require agent commits for implementation requests using emoji commit convention.
 - `2026-05-08-routing-and-template-feature-layout.md` - Adopt React Router Data API and feature-first structure for template.
+- `2026-06-17-add-pwa-support.md` - Add PWA support to the template via vite-plugin-pwa.
 
 ### Superseded
 

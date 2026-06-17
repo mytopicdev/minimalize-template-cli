@@ -13,6 +13,7 @@
 - 📦 **TypeScript** - Tipado estático para mayor seguridad
 - 🛣️ **React Router v6** - Routing con loaders, actions y layouts anidados
 - 🐻 **Zustand** - Gestión de estado simple y escalable con persistencia
+- 📲 **PWA** - Instalable y offline-ready con `vite-plugin-pwa` (prompt de actualización incluido)
 - 🔍 **ESLint** - Linting configurado con reglas modernas
 - 🏗️ **Feature-first architecture** - Estructura por dominio lista para escalar
 
@@ -43,6 +44,7 @@ Para requests de implementación (agregar/corregir), este repositorio define que
 | **Tailwind CSS**     | ^4.1.11 | Framework CSS utility-first |
 | **React Router DOM** | ^6.28.0 | Routing con loaders/actions |
 | **Zustand**          | ^5.0.6  | Gestión de estado           |
+| **vite-plugin-pwa**  | ^1.3.0  | Soporte PWA (offline + manifest) |
 
 ### Herramientas de Desarrollo
 

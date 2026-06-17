@@ -4,7 +4,7 @@ import fse from 'fs-extra'
 import { resolve, dirname } from 'path'
 import { fileURLToPath } from 'url'
 
-const { copy, pathExists, readJSON, writeJSON } = fse
+const { copy, pathExists, readJSON, writeJSON, readFile, writeFile } = fse
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
@@ -81,11 +81,28 @@ const templateDir = resolve(__dirname, 'template')
     // Copiar template
     await copy(templateDir, targetDir)
 
+    // Renombrar gitignore -> .gitignore (npm elimina los .gitignore al publicar)
+    const gitignoreSrc = resolve(targetDir, 'gitignore')
+    if (await pathExists(gitignoreSrc)) {
+      await fse.move(gitignoreSrc, resolve(targetDir, '.gitignore'))
+    }
+
     // Actualizar nombre del package.json con el nombre del proyecto
     const targetPackageJsonPath = resolve(targetDir, 'package.json')
     const targetPackageJson = await readJSON(targetPackageJsonPath)
     targetPackageJson.name = projectName
     await fse.writeJSON(targetPackageJsonPath, targetPackageJson, { spaces: 2 })
+
+    // Actualizar el <title> de index.html con el nombre del proyecto
+    const targetIndexHtmlPath = resolve(targetDir, 'index.html')
+    const targetIndexHtml = await readFile(targetIndexHtmlPath, 'utf-8')
+    await writeFile(
+      targetIndexHtmlPath,
+      targetIndexHtml.replace(
+        '<title>minimalize-template</title>',
+        `<title>${projectName}</title>`,
+      ),
+    )
 
     console.log('✅ ¡Proyecto creado exitosamente!')
     console.log('')
@@ -101,6 +118,7 @@ const templateDir = resolve(__dirname, 'template')
     console.log('   • Tailwind CSS v4')
     console.log('   • React Router v6 (loaders, actions, guards)')
     console.log('   • Zustand (state management + persist)')
+    console.log('   • PWA (vite-plugin-pwa) — instalable + offline')
     console.log('   • ESLint configurado')
     console.log('')
     console.log('💡 Comandos disponibles:')
@@ -117,7 +135,9 @@ const templateDir = resolve(__dirname, 'template')
     console.error('   ', err.message)
     console.error('')
     console.error('💡 Si el problema persiste, reporta el error en:')
-    console.error('   https://github.com/yourusername/minimalize-template-cli/issues')
+    console.error(
+      '   https://github.com/yourusername/minimalize-template-cli/issues',
+    )
     process.exit(1)
   }
 })()
