@@ -9,6 +9,7 @@ Generado con [create-minimalize-template](https://github.com/mytopicdev/minimali
 - **Tailwind CSS v4** — utility-first CSS
 - **React Router v6** — routing con loaders, actions y guards
 - **Zustand** — state management con persistencia
+- **vite-plugin-pwa** — PWA instalable, offline-ready y con prompt de actualización
 - **ESLint 9** — linting configurado
 
 ## Comandos
@@ -21,7 +22,16 @@ pnpm lint         # Ejecutar linter
 pnpm lint:fix     # Autofix de lint
 pnpm format       # Formatear código
 pnpm type-check   # Verificar tipos
+pnpm generate-pwa-assets  # Regenerar iconos PWA desde public/logo.svg
 ```
+
+## PWA
+
+El proyecto es instalable y funciona offline gracias a `vite-plugin-pwa`:
+
+- El manifest se genera automáticamente con el `name`/`short_name` desde `package.json`.
+- Los iconos se generan desde `public/logo.svg` (reemplázalo y corre `pnpm generate-pwa-assets` o simplemente `pnpm build`/`pnpm dev`).
+- Cuando hay una nueva versión desplegada, se muestra un aviso para recargar (`src/common/pwa/reload-prompt.tsx`).
 
 ## Estructura
 

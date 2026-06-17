@@ -12,6 +12,7 @@
     "react-router",
     "react-router-dom",
     "zustand",
+    "pwa",
     "template",
     "scaffold",
     "cli",
