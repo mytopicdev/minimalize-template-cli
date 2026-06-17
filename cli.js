@@ -81,6 +81,12 @@ const templateDir = resolve(__dirname, 'template')
     // Copiar template
     await copy(templateDir, targetDir)
 
+    // Renombrar gitignore -> .gitignore (npm elimina los .gitignore al publicar)
+    const gitignoreSrc = resolve(targetDir, 'gitignore')
+    if (await pathExists(gitignoreSrc)) {
+      await fse.move(gitignoreSrc, resolve(targetDir, '.gitignore'))
+    }
+
     // Actualizar nombre del package.json con el nombre del proyecto
     const targetPackageJsonPath = resolve(targetDir, 'package.json')
     const targetPackageJson = await readJSON(targetPackageJsonPath)
