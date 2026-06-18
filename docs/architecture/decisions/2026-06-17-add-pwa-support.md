@@ -28,12 +28,19 @@ compatible) with:
   `index.html` `<title>` (previously only `package.json`).
 - **`.gitignore` packaging fix**: the template file is committed as `gitignore` (no dot)
   so npm includes it, and `cli.js` renames it back to `.gitignore` on scaffold.
+- **Custom install affordance**: an `InstallPrompt` component (`install-prompt.tsx`)
+  listens for the `beforeinstallprompt` event and surfaces an "Install app" banner,
+  mirroring `ReloadPrompt`'s structure, so installability isn't left to the browser's
+  default UI alone.
 
 ## Consequences
 
 - Positive: scaffolded apps are installable and offline-capable out of the box;
   manifest stays in sync with the project name; generated projects finally keep a
   `.gitignore`.
+- Note: the install button (and installability in general) only appear in a production
+  `build && preview` or a deployed HTTPS host — `pnpm dev` won't trigger
+  `beforeinstallprompt`.
 - Tradeoffs: adds `vite-plugin-pwa`, `@vite-pwa/assets-generator`, and `workbox-window`
   (explicit peer required under pnpm strict linking) as devDependencies; the placeholder
   `logo.svg` must be replaced for real branding.
@@ -50,7 +57,7 @@ compatible) with:
 ## Migration and Impact
 
 **Created**: `template/pwa-assets.config.ts`, `template/public/logo.svg`,
-`template/src/common/pwa/reload-prompt.tsx`.
+`template/src/common/pwa/reload-prompt.tsx`, `template/src/common/pwa/install-prompt.tsx`.
 
 **Modified**: `template/vite.config.ts`, `template/package.json`, `template/index.html`,
 `template/src/main.tsx`, `template/src/vite-env.d.ts`, `cli.js`, root `README.md`/`package.json`.
