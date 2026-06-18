@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 import fse from 'fs-extra'
-import { resolve, dirname } from 'path'
+import { resolve, dirname, relative } from 'path'
 import { fileURLToPath } from 'url'
 
 const { copy, pathExists, readJSON, writeJSON, readFile, writeFile } = fse
@@ -78,8 +78,13 @@ const templateDir = resolve(__dirname, 'template')
     console.log(`📦 Creando proyecto "${projectName}"...`)
     console.log('')
 
-    // Copiar template
-    await copy(templateDir, targetDir)
+    // Copiar template (excluyendo artefactos locales que romperían el proyecto)
+    await copy(templateDir, targetDir, {
+      filter: (src) => {
+        const rel = relative(templateDir, src)
+        return !/(^|[\\/])(node_modules|dist|dev-dist)([\\/]|$)/.test(rel)
+      },
+    })
 
     // Renombrar gitignore -> .gitignore (npm elimina los .gitignore al publicar)
     const gitignoreSrc = resolve(targetDir, 'gitignore')

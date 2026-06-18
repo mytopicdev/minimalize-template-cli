@@ -33,6 +33,9 @@
   },
   "files": [
     "template/**/*",
+    "!template/node_modules/**",
+    "!template/dist/**",
+    "!template/dev-dist/**",
     "cli.js",
     "README.md",
     "CHANGELOG.md"
