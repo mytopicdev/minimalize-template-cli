@@ -60,13 +60,19 @@ Para requests de implementación (agregar/corregir), este repositorio define que
 
 ```bash
 # Versión minimal (sin BaaS)
-pnpx create-minimalize-template mi-proyecto
+npx create-minimalize-template mi-proyecto
 
 # Con Supabase preconfigurado (auth + cliente)
-pnpx create-minimalize-template mi-proyecto --supabase
+npx create-minimalize-template mi-proyecto --supabase
 ```
 
-> 💡 Si `pnpx` te sirve una versión vieja, forzá la última con `pnpx create-minimalize-template@latest ...` o limpiá el cache con `pnpm store prune && rm -rf ~/Library/Caches/pnpm`.
+> ⚠️ **Usá `npx`, no `pnpx`/`pnpm dlx`.** Hay un bug conocido en `pnpm dlx 9.x` que resuelve mal el dist-tag `@latest` para este paquete y termina ejecutando una versión vieja cacheada incluso después de limpiar el cache. Si querés/necesitás usar pnpm, fijá la versión explícita:
+>
+> ```bash
+> pnpx create-minimalize-template@1.7.1 mi-proyecto --supabase
+> # o
+> pnpm dlx --package=create-minimalize-template@latest create-minimalize-template mi-proyecto --supabase
+> ```
 
 ### Comandos disponibles
 
