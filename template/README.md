@@ -8,7 +8,7 @@ Generado con [create-minimalize-template](https://github.com/mytopicdev/minimali
 - **Vite 7** — build tool y dev server
 - **Tailwind CSS v4** — utility-first CSS
 - **React Router v6** — routing con loaders, actions y guards
-- **Zustand** — state management con persistencia
+- **Zustand** — state management (cache reactivo del `AuthProvider`)
 - **vite-plugin-pwa** — PWA instalable, offline-ready y con prompt de actualización
 - **ESLint 9** — linting configurado
 

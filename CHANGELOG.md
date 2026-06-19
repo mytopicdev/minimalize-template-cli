@@ -7,6 +7,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.7.0] - 2026-06-19
+
+### Added
+
+- `AuthProvider` abstraction layer (`src/common/providers/auth/`) — contrato + mock implementation. Store de auth pasa a ser cache reactivo del provider; sesión se hidrata en `main.tsx` antes de montar el router (guards quedan síncronos).
+- `--supabase` flag en el CLI — aplica un overlay (`template-supabase/`) sobre el scaffold base con cliente Supabase, `supabaseAuthProvider`, login con form email/password funcional + OAuth comentado, y merge de `@supabase/supabase-js` en `package.json` + vars en `.env.example`.
+
+### Changed
+
+- `useAuthStore` dejó de usar `persist` (la persistencia ahora es responsabilidad del provider) y expone `{ session, isAuthenticated, setSession }`.
+- `login-page.tsx` ahora es un form email/password real que llama a `authProvider.signInWithPassword`.
+- `home-page.tsx` usa `authProvider.signOut()` en lugar de `useAuthStore().logout()`.
+
 ## [1.4.0] - 2025-05-14
 
 ### ⚠️ Breaking Changes
