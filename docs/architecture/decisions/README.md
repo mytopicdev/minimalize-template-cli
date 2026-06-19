@@ -27,6 +27,8 @@ This directory stores Architecture Decision Records.
 - `2026-05-08-routing-and-template-feature-layout.md` - Adopt React Router Data API and feature-first structure for template.
 - `2026-06-17-add-pwa-support.md` - Add PWA support to the template via vite-plugin-pwa.
 - `2026-06-17-fix-package-exclude-template-node-modules.md` - Exclude template/node_modules from the published package and from scaffold copies.
+- `2026-06-19-introduce-auth-provider-abstraction.md` - Introduce an AuthProvider abstraction between features and the auth backend; hydrate session before router mount.
+- `2026-06-19-add-supabase-overlay-and-cli-flag.md` - Distribute the Supabase integration as an optional CLI overlay (`--supabase`); document the `pnpm dlx` dist-tag resolution workaround.
 
 ### Superseded
 
