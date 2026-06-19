@@ -23,16 +23,32 @@ console.log(`
 
 // Parse argumentos
 const args = process.argv.slice(2)
-const projectName = args[0]
+const KNOWN_FLAGS = ['-h', '--help', '-v', '--version', '--supabase']
+
+const unknownFlag = args.find((arg) => arg.startsWith('-') && !KNOWN_FLAGS.includes(arg))
+if (unknownFlag) {
+  console.error(`❌ Opción desconocida: ${unknownFlag}`)
+  console.error('   Usa --help para ver las opciones disponibles.')
+  process.exit(1)
+}
+
+const useSupabase = args.includes('--supabase')
+const projectName = args.find((arg) => !arg.startsWith('-'))
 
 // Mostrar ayuda
-if (!projectName || projectName === '-h' || projectName === '--help') {
+if (!projectName || args.includes('-h') || args.includes('--help')) {
   console.log('📖 Uso:')
-  console.log('  pnpx create-minimalize-template <nombre-proyecto>')
+  console.log('  pnpx create-minimalize-template <nombre-proyecto> [opciones]')
+  console.log('')
+  console.log('⚙️  Opciones:')
+  console.log('  --supabase       Agrega auth + cliente de Supabase preconfigurado')
+  console.log('  -v, --version    Muestra la versión')
+  console.log('  -h, --help       Muestra esta ayuda')
   console.log('')
   console.log('📋 Ejemplos:')
   console.log('  pnpx create-minimalize-template mi-app')
   console.log('  pnpx create-minimalize-template my-awesome-project')
+  console.log('  pnpx create-minimalize-template mi-app --supabase')
   console.log('')
   console.log('🔗 Más info:')
   console.log('  https://github.com/yourusername/minimalize-template-cli')
@@ -40,7 +56,7 @@ if (!projectName || projectName === '-h' || projectName === '--help') {
 }
 
 // Mostrar versión
-if (projectName === '-v' || projectName === '--version') {
+if (args.includes('-v') || args.includes('--version')) {
   console.log(VERSION)
   process.exit(0)
 }
@@ -56,6 +72,7 @@ if (!/^[a-z0-9-_]+$/i.test(projectName)) {
 
 const targetDir = resolve(process.cwd(), projectName)
 const templateDir = resolve(__dirname, 'template')
+const supabaseTemplateDir = resolve(__dirname, 'template-supabase')
 
 // Verificar que el directorio no existe
 ;(async () => {
@@ -73,6 +90,15 @@ const templateDir = resolve(__dirname, 'template')
       console.error('❌ Error: Template no encontrado.')
       console.error('   Por favor reporta este error en GitHub.')
       process.exit(1)
+    }
+
+    // Verificar que el overlay de Supabase existe (si fue solicitado)
+    if (useSupabase) {
+      const supabaseTemplateExists = await pathExists(supabaseTemplateDir)
+      if (!supabaseTemplateExists) {
+        console.error('❌ Supabase overlay not found in this version of the package.')
+        process.exit(1)
+      }
     }
 
     console.log(`📦 Creando proyecto "${projectName}"...`)
@@ -109,6 +135,36 @@ const templateDir = resolve(__dirname, 'template')
       ),
     )
 
+    // Aplicar overlay de Supabase
+    if (useSupabase) {
+      const packageJsonPatchSrc = resolve(supabaseTemplateDir, 'package.json.patch.json')
+      const envExampleAppendSrc = resolve(supabaseTemplateDir, '.env.example.append')
+
+      // Copiar el resto de archivos del overlay, sobreescribiendo lo que exista
+      await copy(supabaseTemplateDir, targetDir, {
+        overwrite: true,
+        filter: (src) => src !== packageJsonPatchSrc && src !== envExampleAppendSrc,
+      })
+
+      // Mezclar package.json.patch.json dentro del package.json del proyecto
+      if (await pathExists(packageJsonPatchSrc)) {
+        const patch = await readJSON(packageJsonPatchSrc)
+        const mergedPackageJson = await readJSON(targetPackageJsonPath)
+        for (const key of Object.keys(patch)) {
+          mergedPackageJson[key] = { ...mergedPackageJson[key], ...patch[key] }
+        }
+        await fse.writeJSON(targetPackageJsonPath, mergedPackageJson, { spaces: 2 })
+      }
+
+      // Anexar variables de entorno de Supabase a .env.example
+      if (await pathExists(envExampleAppendSrc)) {
+        const envExampleAppend = await readFile(envExampleAppendSrc, 'utf-8')
+        const targetEnvExamplePath = resolve(targetDir, '.env.example')
+        const targetEnvExample = await readFile(targetEnvExamplePath, 'utf-8')
+        await writeFile(targetEnvExamplePath, targetEnvExample + envExampleAppend)
+      }
+    }
+
     console.log('✅ ¡Proyecto creado exitosamente!')
     console.log('')
     console.log('🚀 Próximos pasos:')
@@ -122,9 +178,12 @@ const templateDir = resolve(__dirname, 'template')
     console.log('   • Vite 7 (build tool)')
     console.log('   • Tailwind CSS v4')
     console.log('   • React Router v6 (loaders, actions, guards)')
-    console.log('   • Zustand (state management + persist)')
+    console.log('   • Zustand (state management)')
     console.log('   • PWA (vite-plugin-pwa) — instalable + offline')
     console.log('   • ESLint configurado')
+    if (useSupabase) {
+      console.log('   • Supabase (auth + client preconfigured)')
+    }
     console.log('')
     console.log('💡 Comandos disponibles:')
     console.log('   pnpm dev         → Servidor de desarrollo')
@@ -132,6 +191,14 @@ const templateDir = resolve(__dirname, 'template')
     console.log('   pnpm preview     → Preview del build')
     console.log('   pnpm lint        → Ejecutar linter')
     console.log('')
+    if (useSupabase) {
+      console.log('🔐 Supabase setup:')
+      console.log('   1. Crea un proyecto en https://supabase.com')
+      console.log('   2. Copia .env.example → .env')
+      console.log('   3. Pega tu VITE_SUPABASE_URL y VITE_SUPABASE_ANON_KEY')
+      console.log('   4. ¡Listo! El cliente está en src/common/providers/supabase-client.ts')
+      console.log('')
+    }
     console.log('¡Happy coding! 🎉')
     console.log('')
   } catch (err) {

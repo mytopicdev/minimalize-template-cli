@@ -33,9 +33,11 @@
   },
   "files": [
     "template/**/*",
+    "template-supabase/**/*",
     "!template/node_modules/**",
     "!template/dist/**",
     "!template/dev-dist/**",
+    "!template-supabase/node_modules/**",
     "cli.js",
     "README.md",
     "CHANGELOG.md"
