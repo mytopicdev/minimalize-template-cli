@@ -4,9 +4,6 @@ import { authProvider } from '@/common/providers/auth'
 import { PATHS } from '@/features/routing'
 import { cn } from '@/common/utils/cn'
 
-const inputClass =
-  'rounded-md border border-gray-300 px-3 py-2 text-sm dark:border-gray-600 dark:bg-gray-800 dark:text-gray-100'
-
 export function LoginPage() {
   const navigate = useNavigate()
   const [email, setEmail] = useState('')
@@ -38,7 +35,7 @@ export function LoginPage() {
             onChange={(e) => setEmail(e.target.value)}
             placeholder="Email"
             required
-            className={inputClass}
+            className="rounded-md border border-gray-300 px-3 py-2 text-sm dark:border-gray-600 dark:bg-gray-800 dark:text-gray-100"
           />
           <input
             type="password"
@@ -46,7 +43,7 @@ export function LoginPage() {
             onChange={(e) => setPassword(e.target.value)}
             placeholder="Password"
             required
-            className={inputClass}
+            className="rounded-md border border-gray-300 px-3 py-2 text-sm dark:border-gray-600 dark:bg-gray-800 dark:text-gray-100"
           />
         </div>
         {error && <p className="mt-3 text-sm text-red-600 dark:text-red-400">{error}</p>}
@@ -59,6 +56,23 @@ export function LoginPage() {
         >
           Sign in
         </button>
+        {/* OAuth providers — uncomment after configuring in Supabase dashboard.
+            You'll also need to import `supabase` from '@/common/providers/supabase-client':
+        <button
+          type="button"
+          onClick={() => supabase.auth.signInWithOAuth({ provider: 'google' })}
+          className="mt-3 w-full rounded-md border border-gray-300 px-3 py-2 text-sm font-medium text-gray-900 hover:bg-gray-50 dark:border-gray-600 dark:text-gray-100 dark:hover:bg-gray-800"
+        >
+          Continue with Google
+        </button>
+        <button
+          type="button"
+          onClick={() => supabase.auth.signInWithOAuth({ provider: 'github' })}
+          className="mt-2 w-full rounded-md border border-gray-300 px-3 py-2 text-sm font-medium text-gray-900 hover:bg-gray-50 dark:border-gray-600 dark:text-gray-100 dark:hover:bg-gray-800"
+        >
+          Continue with GitHub
+        </button>
+        */}
       </form>
     </div>
   )

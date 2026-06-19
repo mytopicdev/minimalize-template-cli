@@ -1,13 +1,12 @@
 import { useNavigate } from 'react-router-dom'
-import { useAuthStore } from '@/features/auth'
+import { authProvider } from '@/common/providers/auth'
 import { PATHS } from '@/features/routing'
 
 export function HomePage() {
   const navigate = useNavigate()
-  const { logout } = useAuthStore()
 
-  const handleLogout = () => {
-    logout()
+  const handleLogout = async () => {
+    await authProvider.signOut()
     navigate(PATHS.LOGIN)
   }
 
