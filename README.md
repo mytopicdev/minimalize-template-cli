@@ -12,10 +12,11 @@
 - 🎨 **Tailwind CSS v4** - Framework CSS utility-first (última versión)
 - 📦 **TypeScript** - Tipado estático para mayor seguridad
 - 🛣️ **React Router v6** - Routing con loaders, actions y layouts anidados
-- 🐻 **Zustand** - Gestión de estado simple y escalable con persistencia
+- 🐻 **Zustand** - Gestión de estado simple y escalable
 - 📲 **PWA** - Instalable y offline-ready con `vite-plugin-pwa` (prompt de actualización incluido)
 - 🔍 **ESLint** - Linting configurado con reglas modernas
 - 🏗️ **Feature-first architecture** - Estructura por dominio lista para escalar
+- 🔐 **Auth provider opcional con Supabase** - Activable con el flag `--supabase` (auth + cliente preconfigurados)
 
 ## 🏗️ Arquitectura y Decisiones
 
@@ -58,8 +59,14 @@ Para requests de implementación (agregar/corregir), este repositorio define que
 ### Crear un nuevo proyecto
 
 ```bash
+# Versión minimal (sin BaaS)
 pnpx create-minimalize-template mi-proyecto
+
+# Con Supabase preconfigurado (auth + cliente)
+pnpx create-minimalize-template mi-proyecto --supabase
 ```
+
+> 💡 Si `pnpx` te sirve una versión vieja, forzá la última con `pnpx create-minimalize-template@latest ...` o limpiá el cache con `pnpm store prune && rm -rf ~/Library/Caches/pnpm`.
 
 ### Comandos disponibles
 
@@ -145,32 +152,40 @@ export const appRouter = createBrowserRouter([
 ])
 ```
 
-### Store de Autenticación con Zustand
+### Abstracción de Auth Provider
 
-Store global con persistencia en localStorage:
+El template define un contrato `AuthProvider` (`src/common/providers/auth/auth-provider.ts`) que las features consumen. El store de Zustand pasa a ser un cache reactivo del provider activo. En `main.tsx` se hidrata la sesión antes de montar el router, así los guards quedan síncronos.
 
 ```typescript
-// src/features/auth/state/use-auth-store.ts
-import { create } from 'zustand'
-import { persist } from 'zustand/middleware'
-
-interface AuthStore {
-  isAuthenticated: boolean
-  login: () => void
-  logout: () => void
+export interface AuthProvider {
+  getSession(): Promise<AuthSession | null>
+  signInWithPassword(email: string, password: string): Promise<AuthSession>
+  signUp(email: string, password: string): Promise<AuthSession>
+  signOut(): Promise<void>
+  onAuthChange(callback: (session: AuthSession | null) => void): () => void
 }
-
-export const useAuthStore = create<AuthStore>()(
-  persist(
-    (set) => ({
-      isAuthenticated: false,
-      login: () => set({ isAuthenticated: true }),
-      logout: () => set({ isAuthenticated: false }),
-    }),
-    { name: 'auth-storage' },
-  ),
-)
 ```
+
+- Sin flag: se exporta `mockAuthProvider` (persiste una sesión fake en `localStorage`).
+- Con `--supabase`: se exporta `supabaseAuthProvider` (envuelve `supabase.auth`).
+
+Cambiar de backend = reemplazar un archivo (`src/common/providers/auth/index.ts`), no refactorizar todas las features.
+
+### Variante con Supabase (`--supabase`)
+
+Genera además:
+
+- `src/common/providers/supabase-client.ts` — cliente Supabase tipado.
+- `src/common/providers/auth/supabase-auth-provider.ts` — implementación del contrato.
+- `login-page.tsx` con form email/password funcional + bloque OAuth (Google/GitHub) comentado listo para activar.
+- `@supabase/supabase-js` agregado a `dependencies`.
+- `VITE_SUPABASE_URL` y `VITE_SUPABASE_ANON_KEY` agregados a `.env.example`.
+
+Setup post-scaffold:
+
+1. Creá un proyecto en https://supabase.com y copiá `Project URL` y `anon public key` desde **Settings → API**.
+2. `cp .env.example .env` y pegá los valores.
+3. `pnpm dev` — el login funciona end-to-end.
 
 ### Path Aliases
 
