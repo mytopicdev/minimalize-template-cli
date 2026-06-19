@@ -1,21 +1,14 @@
 import { create } from 'zustand'
-import { persist } from 'zustand/middleware'
+import type { AuthSession } from '@/common/providers/auth'
 
 interface AuthStore {
+  session: AuthSession | null
   isAuthenticated: boolean
-  login: () => void
-  logout: () => void
+  setSession: (session: AuthSession | null) => void
 }
 
-export const useAuthStore = create<AuthStore>()(
-  persist(
-    (set) => ({
-      isAuthenticated: false,
-      login: () => set({ isAuthenticated: true }),
-      logout: () => set({ isAuthenticated: false }),
-    }),
-    {
-      name: 'auth-storage',
-    },
-  ),
-)
+export const useAuthStore = create<AuthStore>()((set) => ({
+  session: null,
+  isAuthenticated: false,
+  setSession: (session) => set({ session, isAuthenticated: session !== null }),
+}))
